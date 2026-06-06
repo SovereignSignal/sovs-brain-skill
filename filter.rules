@@ -1,0 +1,41 @@
+# sovs-brain hop-1 rsync filter. The backstop that keeps secrets, churn, build
+# artifacts, and large binaries from ever reaching the stage (and thus the brain).
+# rsync filter syntax: '-' exclude, '+' include. Excludes win as written.
+
+# Secrets / host-local config (never ship)
+- TOOLS.md
+- .env
+- .env.*
+- *.key
+- *.pem
+- *.p12
+- id_*
+- *secret*
+- *token*
+- *credential*
+- .gitea-token
+
+# Runtime churn (not durable)
+- now.md
+- recent.md
+- *.log
+- *.pid
+- *.sock
+- vector*/
+- .cache/
+
+# VCS / build artifacts
+- .git/
+- node_modules/
+- .venv/
+- venv/
+- __pycache__/
+- *.pyc
+
+# Large binaries (size cap also applies via --max-size)
+- *.tar
+- *.tar.gz
+- *.tgz
+- *.zip
+- *.dmg
+- *.iso

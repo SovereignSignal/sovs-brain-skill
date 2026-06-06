@@ -1,0 +1,25 @@
+# sovs-brain producer config. Copy to sovs-brain.conf and edit for this host.
+# Run scripts/assess.sh first to see what this host actually writes.
+
+HOST="$(hostname -s)"
+STAGE="$HOME/.sovs-brain/stage"
+MAX_SIZE="25m"            # rsync --max-size; skip anything larger
+
+# Identity / config files to capture (durable agent identity only).
+# Do NOT list TOOLS.md, .env, or anything with secrets.
+IDENTITY_FILES=(
+  "$HOME/.openclaw/workspace/SOUL.md"
+  "$HOME/.openclaw/workspace/AGENTS.md"
+  "$HOME/.openclaw/workspace/IDENTITY.md"
+  # "$HOME/.hermes/SOUL.md"
+)
+
+# Durable memory to capture (skip churn like now.md / recent.md / vector index).
+MEMORY_PATHS=(
+  "$HOME/.openclaw/workspace/MEMORY.md"
+)
+
+# Work outputs to capture (trailing slash = contents of the dir).
+OUTPUT_DIRS=(
+  # "$HOME/work/outputs/"
+)
