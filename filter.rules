@@ -6,6 +6,8 @@
 - TOOLS.md
 - .env
 - .env.*
+- .secrets
+- .DS_Store
 - *.key
 - *.pem
 - *.p12
@@ -13,7 +15,6 @@
 - *secret*
 - *token*
 - *credential*
-- .gitea-token
 
 # Runtime churn (not durable)
 - now.md
@@ -23,6 +24,10 @@
 - *.sock
 - vector*/
 - .cache/
+- terminals/
+- mcps/
+- agent-tools/
+- plugins/cache/
 
 # VCS / build artifacts
 - .git/

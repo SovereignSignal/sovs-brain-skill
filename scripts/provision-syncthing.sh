@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# sovs-brain: hop 2, option A. Share the stage dir as a Syncthing SEND-ONLY folder.
-# Pilot-grade helper: checks prerequisites and prints the exact pairing steps.
+# UNUSED. Hop 2 is rsync (scripts/transport-rsync.sh), not Syncthing.
+# Kept as a leftover helper: checks prerequisites and prints pairing steps.
 # (Folder add is done via the Syncthing UI/API once, then it runs continuously.)
 set -euo pipefail
 
@@ -33,7 +33,7 @@ Pairing steps (do once):
   3. On the MAIN STORE, accept the shared folder and set its type to
      Receive Only, pointing at: raw/workspaces/$HOST/
   4. For fully-local operation: in Settings, disable Global Discovery and
-     Relaying, and pin each device's address to its private/Tailscale IP.
+     Relaying, and pin each device's address to a private IP.
 
 Verify: edits in $DEST appear under raw/workspaces/$HOST/ on the main store,
 and nothing ever flows back to this host.

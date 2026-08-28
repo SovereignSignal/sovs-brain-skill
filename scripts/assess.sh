@@ -8,7 +8,16 @@ echo
 
 echo "## Harness workspace dirs"
 found_harness=0
-for d in "$HOME/.openclaw/workspace" "$HOME/.hermes" "$HOME/.claude"; do
+for d in \
+  "$HOME/.openclaw/workspace" \
+  "$HOME/.hermes" \
+  "$HOME/.claude" \
+  "$HOME/.codex" \
+  "$HOME/.cursor" \
+  "$HOME/Documents/Claude" \
+  "$HOME/Documents/Codex" \
+  "$HOME/Documents/Cursor"
+do
   if [ -d "$d" ]; then
     echo "  found: $d ($(du -sh "$d" 2>/dev/null | cut -f1))"
     found_harness=1
@@ -19,7 +28,11 @@ done
 echo
 echo "## Identity / memory files (common locations)"
 NAMES=(SOUL.md AGENTS.md IDENTITY.md USER.md HEARTBEAT.md TOOLS.md MEMORY.md)
-SEARCH=("$PWD" "$HOME" "$HOME/.openclaw/workspace" "$HOME/.hermes" "$HOME/.claude")
+SEARCH=(
+  "$PWD" "$HOME"
+  "$HOME/.openclaw/workspace" "$HOME/.hermes" "$HOME/.claude" "$HOME/.codex"
+  "$HOME/.cursor" "$HOME/Documents/Claude" "$HOME/Documents/Codex" "$HOME/Documents/Cursor"
+)
 seen=""
 for base in "${SEARCH[@]}"; do
   [ -d "$base" ] || continue
