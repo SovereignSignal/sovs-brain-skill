@@ -4,22 +4,34 @@
 HOST="$(hostname -s)"
 STAGE="$HOME/.sovs-brain/stage"
 MAX_SIZE="25m"            # rsync --max-size; skip anything larger
+MAX_DELETE="20"           # hop 2 catastrophe brake
+
+# Hop 2 dest. Local vault root, or a checkout the main store can see.
+# Leave empty on a producer that only builds a stage for a remote pull
+# (see docs/transport-rsync-pull.md).
+BRAIN=""                  # e.g. "$HOME/Documents/brain"
+LANE="raw/tools/Cursor/${HOST}"
 
 # Identity / config files to capture (durable agent identity only).
 # Do NOT list TOOLS.md, .env, or anything with secrets.
+# Cursor has no SOUL.md by default; OpenClaw/Hermes examples below.
 IDENTITY_FILES=(
-  "$HOME/.openclaw/workspace/SOUL.md"
-  "$HOME/.openclaw/workspace/AGENTS.md"
-  "$HOME/.openclaw/workspace/IDENTITY.md"
+  # "$HOME/Documents/Cursor/AGENTS.md"
+  # "$HOME/Documents/Cursor/IDENTITY.md"
+  # "$HOME/.openclaw/workspace/SOUL.md"
+  # "$HOME/.openclaw/workspace/AGENTS.md"
+  # "$HOME/.openclaw/workspace/IDENTITY.md"
   # "$HOME/.hermes/SOUL.md"
 )
 
 # Durable memory to capture (skip churn like now.md / recent.md / vector index).
 MEMORY_PATHS=(
-  "$HOME/.openclaw/workspace/MEMORY.md"
+  # "$HOME/.openclaw/workspace/MEMORY.md"
 )
 
 # Work outputs to capture (trailing slash = contents of the dir).
+# Point at finished notes, not ~/.cursor (plugins, terminals, MCP state).
 OUTPUT_DIRS=(
+  # "$HOME/Documents/Cursor/"
   # "$HOME/work/outputs/"
 )

@@ -21,7 +21,7 @@ stage_one() {  # <src> <subdir>
         --filter=". $FILTER" \
         --max-size="${MAX_SIZE:-25m}" \
         "$src" "$DEST/$sub/"
-  echo "  staged: $src -> $sub/"
+  echo "  rsync: $src -> $sub/  (filter may drop the file; check stage listing)"
 }
 
 echo "# sanitize -> $DEST"
@@ -31,6 +31,11 @@ for o in "${OUTPUT_DIRS[@]:-}";    do [ -n "${o:-}" ] && stage_one "$o" output; 
 
 echo
 echo "# stage contents:"
-find "$DEST" -type f 2>/dev/null | sed "s#$DEST/#  #" | head -100
+n=0
+while IFS= read -r f; do
+  n=$((n + 1))
+  [ "$n" -le 100 ] && echo "  ${f#"$DEST/"}"
+done < <(find "$DEST" -type f 2>/dev/null | sort)
+echo "  ($n files)"
 echo
 echo "Review the above. That is exactly what hop 2 will transport to the main store."
